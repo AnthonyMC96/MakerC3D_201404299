@@ -36,7 +36,7 @@ public class ControlC3D {
     }
     
     /**
-     * Devuelve el código 3D generao hasta el momento de su invocación.
+     * Devuelve el código 3D generado hasta el momento de su invocación.
      * @return Código 3D generado
      */
     public static String getC3D(){

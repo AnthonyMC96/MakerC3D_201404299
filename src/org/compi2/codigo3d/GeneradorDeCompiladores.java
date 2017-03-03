@@ -1,7 +1,7 @@
 package org.compi2.codigo3d;
 
 /**
- *
+ *gfd
  * @author esvux
  */
 public class GeneradorDeCompiladores {

@@ -25,6 +25,15 @@ DIV             = "/"
 POT             = "^"
 PAR_IZQ         = "("
 PAR_DER         = ")"
+IGUAL           = "=="
+DIF             = "!="
+MAY             = ">"
+MEN             = "<"
+MAYIGUAL        = ">="
+MENIGUAL        = "<="
+AND             = "&&"
+OR              = "||"
+NOT             = "!"
 
 ID              = [A-Za-z][_0-9A-Za-z]*
 ENTERO          = [0-9]+
@@ -45,6 +54,17 @@ ENTER   = [\ \n]
 <YYINITIAL> {POT}	    { return new Symbol(sym.POT, yyline, yycolumn, null); }
 <YYINITIAL> {PAR_IZQ}	    { return new Symbol(sym.PAR_IZQ, yyline, yycolumn, null); }
 <YYINITIAL> {PAR_DER}	    { return new Symbol(sym.PAR_DER, yyline, yycolumn, null); }
+//-----------------------------OPERADORES RELACIONALES--------------------------------------
+<YYINITIAL> {IGUAL}         { return new Symbol(sym.IGUAL, yyline, yycolumn, yytext()); }
+<YYINITIAL> {DIF}           { return new Symbol(sym.DIF, yyline, yycolumn, yytext()); }
+<YYINITIAL> {MAY}           { return new Symbol(sym.MAY, yyline, yycolumn, null); }
+<YYINITIAL> {MEN}	    { return new Symbol(sym.MEN, yyline, yycolumn, null); }
+<YYINITIAL> {MAYIGUAL}      { return new Symbol(sym.MAYIGUAL, yyline, yycolumn, null); }
+<YYINITIAL> {MENIGUAL}	    { return new Symbol(sym.MENIGUAL, yyline, yycolumn, null); }
+//-----------------------------OPERADORES LOGICOS--------------------------------------------
+<YYINITIAL> {AND}	    { return new Symbol(sym.AND, yyline, yycolumn, null); }
+<YYINITIAL> {OR}	    { return new Symbol(sym.OR, yyline, yycolumn, null); }
+<YYINITIAL> {NOT}	    { return new Symbol(sym.NOT, yyline, yycolumn, null); }
 
 <YYINITIAL> {SPACE}     { /*Espacios en blanco, ignorados*/ }
 <YYINITIAL> {ENTER}     { /*Saltos de linea, ignorados*/}

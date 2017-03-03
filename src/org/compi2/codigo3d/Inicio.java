@@ -2,8 +2,9 @@ package org.compi2.codigo3d;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
+import javax.swing.JOptionPane;
 import org.compi2.codigo3d.parser.ControlC3D;
-import org.compi2.codigo3d.parser.parser;
+import org.compi2.codigo3d.parser.Sintactico;
 import org.compi2.codigo3d.parser.scanner;
 
 /**
@@ -25,10 +26,26 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton_GenerarC3D = new javax.swing.JButton();
-        jTextField_Expresion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Codigo3Dgenerado = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextField_Expresion = new javax.swing.JTextArea();
+        jButton_GenerarC3D1 = new javax.swing.JButton();
+        btn_ejemplo1 = new javax.swing.JButton();
+        btn_ejemplo2 = new javax.swing.JButton();
+        btn_ejemplo3 = new javax.swing.JButton();
+        btn_ejemplo4 = new javax.swing.JButton();
+        btn_ejemplo6 = new javax.swing.JButton();
+        btn_ejemplo5 = new javax.swing.JButton();
+        btn_ejemplo7 = new javax.swing.JButton();
+        btn_datosPersonales = new javax.swing.JButton();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,31 +57,131 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jTextField_Expresion.setFont(new java.awt.Font("Roboto Mono", 0, 18)); // NOI18N
-
         jTextArea_Codigo3Dgenerado.setColumns(20);
         jTextArea_Codigo3Dgenerado.setFont(new java.awt.Font("Roboto Mono Light", 0, 18)); // NOI18N
         jTextArea_Codigo3Dgenerado.setRows(5);
         jScrollPane1.setViewportView(jTextArea_Codigo3Dgenerado);
 
+        jTextField_Expresion.setColumns(20);
+        jTextField_Expresion.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jTextField_Expresion.setRows(5);
+        jScrollPane3.setViewportView(jTextField_Expresion);
+
+        jButton_GenerarC3D1.setFont(new java.awt.Font("Roboto Condensed", 0, 12)); // NOI18N
+        jButton_GenerarC3D1.setText("Generar");
+
+        btn_ejemplo1.setText("EJEMPLO 1");
+        btn_ejemplo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo1ActionPerformed(evt);
+            }
+        });
+
+        btn_ejemplo2.setText("EJEMPLO 2");
+        btn_ejemplo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo2ActionPerformed(evt);
+            }
+        });
+
+        btn_ejemplo3.setText("EJEMPLO 3");
+        btn_ejemplo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo3ActionPerformed(evt);
+            }
+        });
+
+        btn_ejemplo4.setText("EJEMPLO 4");
+        btn_ejemplo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo4ActionPerformed(evt);
+            }
+        });
+
+        btn_ejemplo6.setText("EJEMPLO 6");
+        btn_ejemplo6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo6ActionPerformed(evt);
+            }
+        });
+
+        btn_ejemplo5.setText("EJEMPLO 5");
+        btn_ejemplo5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo5ActionPerformed(evt);
+            }
+        });
+
+        btn_ejemplo7.setText("EJEMPLO 7");
+        btn_ejemplo7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ejemplo7ActionPerformed(evt);
+            }
+        });
+
+        btn_datosPersonales.setText("DATOS \nPERSONALES");
+        btn_datosPersonales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_datosPersonalesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTextField_Expresion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_GenerarC3D, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton_GenerarC3D, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ejemplo7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_datosPersonales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 235, Short.MAX_VALUE)
+                    .addComponent(jButton_GenerarC3D1)
+                    .addGap(0, 236, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_Expresion, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(jButton_GenerarC3D, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_GenerarC3D, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_datosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_ejemplo1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ejemplo2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ejemplo3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ejemplo4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ejemplo5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(btn_ejemplo6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ejemplo7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 243, Short.MAX_VALUE)
+                    .addComponent(jButton_GenerarC3D1)
+                    .addGap(0, 243, Short.MAX_VALUE)))
         );
 
         pack();
@@ -80,7 +197,7 @@ public class Inicio extends javax.swing.JFrame {
             jTextArea_Codigo3Dgenerado.setText("");
             System.out.println("Inicia la generación de C3D...");
             scanner scan = new scanner(new BufferedReader( new StringReader(texto)));
-            parser parser = new parser(scan);
+            Sintactico parser = new Sintactico(scan);
             parser.parse();
             jTextArea_Codigo3Dgenerado.setText(ControlC3D.getC3D());
             System.out.println("Finaliza la generación de C3D...");
@@ -89,6 +206,38 @@ public class Inicio extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton_GenerarC3DActionPerformed
+
+    private void btn_ejemplo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo1ActionPerformed
+        jTextField_Expresion.setText("1+2+3*4*5*6^7^8^9");
+    }//GEN-LAST:event_btn_ejemplo1ActionPerformed
+
+    private void btn_ejemplo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo2ActionPerformed
+        jTextField_Expresion.setText("3+1*2>2+2");
+    }//GEN-LAST:event_btn_ejemplo2ActionPerformed
+
+    private void btn_ejemplo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo3ActionPerformed
+        jTextField_Expresion.setText("num1<num3");
+    }//GEN-LAST:event_btn_ejemplo3ActionPerformed
+
+    private void btn_ejemplo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo4ActionPerformed
+        jTextField_Expresion.setText("(2-1)*-5==5^1+3");
+    }//GEN-LAST:event_btn_ejemplo4ActionPerformed
+
+    private void btn_ejemplo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo5ActionPerformed
+        jTextField_Expresion.setText("bool1 || bool2 && bool3");
+    }//GEN-LAST:event_btn_ejemplo5ActionPerformed
+
+    private void btn_ejemplo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo6ActionPerformed
+        jTextField_Expresion.setText("12>65/1^3 && falso || (3+5)^num3>(getNum)");
+    }//GEN-LAST:event_btn_ejemplo6ActionPerformed
+
+    private void btn_ejemplo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ejemplo7ActionPerformed
+        jTextField_Expresion.setText("-156-54*-1");
+    }//GEN-LAST:event_btn_ejemplo7ActionPerformed
+
+    private void btn_datosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_datosPersonalesActionPerformed
+        JOptionPane.showConfirmDialog(null,"Carlos Antonio Marroquin Cabrera\n201404299\nHoja de Trabajo 2");
+    }//GEN-LAST:event_btn_datosPersonalesActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -110,9 +259,21 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_datosPersonales;
+    private javax.swing.JButton btn_ejemplo1;
+    private javax.swing.JButton btn_ejemplo2;
+    private javax.swing.JButton btn_ejemplo3;
+    private javax.swing.JButton btn_ejemplo4;
+    private javax.swing.JButton btn_ejemplo5;
+    private javax.swing.JButton btn_ejemplo6;
+    private javax.swing.JButton btn_ejemplo7;
     private javax.swing.JButton jButton_GenerarC3D;
+    private javax.swing.JButton jButton_GenerarC3D1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea_Codigo3Dgenerado;
-    private javax.swing.JTextField jTextField_Expresion;
+    private javax.swing.JTextArea jTextField_Expresion;
     // End of variables declaration//GEN-END:variables
 }
