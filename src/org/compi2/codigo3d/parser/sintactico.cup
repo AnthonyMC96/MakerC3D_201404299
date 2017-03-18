@@ -1,3 +1,9 @@
+/*
+    CARLOS ANTONIO MARROQUÍN CABRERA
+    COMPILADORES 2
+    201404299
+    HOJA DE TRABAJO NO.3
+*/
 package org.compi2.codigo3d.parser;
 
 import java_cup.runtime.Symbol;
@@ -22,70 +28,143 @@ action code
       
 :}
 
-terminal String ID, ENTERO, DECIMAL;
-terminal TokenC3D MAS, MENOS, MULT, DIV, POT, PAR_IZQ, PAR_DER;
-nonterminal NodoC3D inicial, expresion;
+terminal String ID, ENTERO, DECIMAL,UMENOS;
+terminal String MAS, MENOS, MULT, DIV, POT, PAR_IZQ, PAR_DER;
+terminal String IGUAL, DIF, MAY,MEN,MAYIGUAL,MENIGUAL;
+terminal String AND, OR, NOT;
+non terminal NodoC3D expresion,logica,relacional,aritmetica,dato;
 
+precedence left OR;
+precedence left AND;
+precedence left NOT;
+precedence left IGUAL, DIF, MAY, MEN, MAYIGUAL,MENIGUAL;
 precedence left MAS, MENOS;
-precedence left MULT, DIV; 
-precedence right POT; 
+precedence left MULT, DIV;
+precedence right POT;
+precedence left PAR_IZQ,PAR_DER;
+precedence right UMENOS;
 
-start with inicial;
+start with expresion;
 
-inicial     ::= {: ControlC3D.reiniciar(); :} expresion:exp 
-                    {: 
-                        RESULT = exp;
-                        ControlC3D.agregarC3D("//Último valor: " + exp.getCad());
+
+
+expresion::={: ControlC3D.reiniciar(); :}logica:exp {: 
+                        /*RESULT = exp;
+                        ControlC3D.agregarC3D("//Ultimo valor: " + exp.getCad());*/
+                        ControlC3D.agregarC3D("Etiqueta(s) de verdadero "+exp.getEtqV()+"\n");
+                        ControlC3D.agregarC3D("Etiqueta(s) de falso "+exp.getEtqF()+"\n");
                     :};
 
-expresion   ::= expresion:izq MAS expresion:der
-                    {: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " + " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
-                    :}
-            |   expresion:izq MENOS expresion:der
-                    {: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " - " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
-                    :}
-            |   expresion:izq MULT expresion:der
-                    {: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " * " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
-                    :}
-            |   expresion:izq DIV expresion:der
-                    {: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " / " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
-                    :}
-            |   expresion:izq POT expresion:der
-                    {: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = " + izq.getCad() + " ^ " + der.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
-                    :}
-            |   MENOS expresion:exp 
-                    {: 
-                        String temp = ControlC3D.generaTemp();
-                        String c3d = temp + " = - " + exp.getCad() + ";\n";
-                        ControlC3D.agregarC3D(c3d);
-                        RESULT = new NodoC3D(temp); 
-                    :}
-            |   PAR_IZQ expresion:exp PAR_DER   
-                    {: RESULT = exp; :}
-            |   ID:id           
-                    {: RESULT = new NodoC3D(id); :}
-            |   ENTERO:entero   
-                    {: RESULT = new NodoC3D(entero); :}
-            |   DECIMAL:decimal 
-                    {: RESULT = new NodoC3D(decimal); :}
+logica::= logica:izq    AND:b   {:ControlC3D.agregarC3D(izq.getEtqV()+":\n");:}    logica:der    
+                                                                    {: 
+RESULT= new NodoC3D(der.getEtqV(),izq.getEtqF()+","+der.getEtqF());
+                                                                    :}                                      
+      |   logica:izq    OR:b  {:ControlC3D.agregarC3D(izq.getEtqF()+":\n");:}      logica:der    
+                                                                    {: 
+RESULT= new NodoC3D(izq.getEtqV()+","+der.getEtqV(),der.getEtqF());
+                                                                    :}
+        |   NOT:izq       logica:exp                                {: 
+//Se intercambian etiquetas.            
+RESULT= new NodoC3D(exp.getEtqF(),exp.getEtqV());
+                                                                    :}
+
+        |   PAR_IZQ:izq    logica:exp    PAR_DER:der                    {: 
+                                                                        RESULT = exp; 
+                                                                        :}
+        |   relacional:exp                        {:RESULT=exp;:}
+        ;
+
+
+relacional::=   aritmetica:izq IGUAL:b        aritmetica:der            {: 
+                                                                        String ifStmt=ControlC3D.generaIf(izq.getCad(),"==",der.getCad());
+                                                                        String etqV=ControlC3D.generaGoto(); String etqF=ControlC3D.generaGoto();
+                                                                        String c3d=ifStmt+" goto "+etqV+"\n"+" goto "+etqF+"\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT= new NodoC3D(etqV,etqF);
+                                                                        :}
+            |   aritmetica:izq DIF:b          aritmetica:der            {: 
+                                                                        String ifStmt=ControlC3D.generaIf(izq.getCad(),"!=",der.getCad());
+                                                                        String etqV=ControlC3D.generaGoto(); String etqF=ControlC3D.generaGoto();
+                                                                        String c3d=ifStmt+" goto "+etqV+"\n"+" goto "+etqF+"\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT= new NodoC3D(etqV,etqF);
+                                                                        :}
+            |   aritmetica:izq MAY:b          aritmetica:der            {:
+                                                                        String ifStmt=ControlC3D.generaIf(izq.getCad(),">",der.getCad());
+                                                                        String etqV=ControlC3D.generaGoto(); String etqF=ControlC3D.generaGoto();
+                                                                        String c3d=ifStmt+" goto "+etqV+"\n"+" goto "+etqF+"\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT= new NodoC3D(etqV,etqF);
+                                                                        :}
+            |   aritmetica:izq MEN:b          aritmetica:der            {:
+                                                                        String ifStmt=ControlC3D.generaIf(izq.getCad(),"<",der.getCad());
+                                                                        String etqV=ControlC3D.generaGoto(); String etqF=ControlC3D.generaGoto();
+                                                                        String c3d=ifStmt+" goto "+etqV+"\n"+" goto "+etqF+"\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT= new NodoC3D(etqV,etqF);
+                                                                        :}
+            |   aritmetica:izq MAYIGUAL:b     aritmetica:der{: 
+                                                                        String ifStmt=ControlC3D.generaIf(izq.getCad(),">=",der.getCad());
+                                                                        String etqV=ControlC3D.generaGoto(); String etqF=ControlC3D.generaGoto();
+                                                                        String c3d=ifStmt+" goto "+etqV+"\n"+" goto "+etqF+"\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT= new NodoC3D(etqV,etqF);
+                                                                        :}
+            |   aritmetica:izq MENIGUAL:b     aritmetica:der{: 
+                                                                        String ifStmt=ControlC3D.generaIf(izq.getCad(),"<=",der.getCad());
+                                                                        String etqV=ControlC3D.generaGoto(); String etqF=ControlC3D.generaGoto();
+                                                                        String c3d=ifStmt+" goto "+etqV+"\n"+" goto "+etqF+"\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT= new NodoC3D(etqV,etqF);
+                                                                        :}
+            |   aritmetica:exp                                  {:RESULT=exp;:}
             ;
+aritmetica::=                   aritmetica:izq    MAS:b       aritmetica:der{: 
+                                                                        String temp = ControlC3D.generaTemp();
+                                                                        String c3d = temp + " = " + izq.getCad() + " + " + der.getCad() + ";\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT = new NodoC3D(temp); 
+                                                                        :}
+            |   aritmetica:izq    MENOS:b     aritmetica:der{: 
+                                                                        String temp = ControlC3D.generaTemp();
+                                                                        String c3d = temp + " = " + izq.getCad() + " - " + der.getCad() + ";\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT = new NodoC3D(temp); 
+                                                                        :}
+            |   aritmetica:izq    MULT:b      aritmetica:der{: 
+                                                                        String temp = ControlC3D.generaTemp();
+                                                                        String c3d = temp + " = " + izq.getCad() + " * " + der.getCad() + ";\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT = new NodoC3D(temp); 
+                                                                        :}
+            |   aritmetica:izq    DIV:b       aritmetica:der{: 
+                                                                        String temp = ControlC3D.generaTemp();
+                                                                        String c3d = temp + " = " + izq.getCad() + " / " + der.getCad() + ";\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT = new NodoC3D(temp); 
+                                                                        :}
+            |   aritmetica:izq    POT:b       aritmetica:der{: 
+                                                                        String temp = ControlC3D.generaTemp();
+                                                                        String c3d = temp + " = " + izq.getCad() + " ^ " + der.getCad() + ";\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT = new NodoC3D(temp); 
+                                                                        :}
+            |   MENOS:a         aritmetica:exp          {: 
+                                                                        String temp = ControlC3D.generaTemp();
+                                                                        String c3d = temp + " = - " + exp.getCad() + ";\n";
+                                                                        ControlC3D.agregarC3D(c3d);
+                                                                        RESULT = new NodoC3D(temp); 
+                                                                        :}%prec UMENOS
+            |   PAR_IZQ:a        aritmetica:exp PAR_DER:c {: 
+                                                                        RESULT = exp; 
+                                                                        :}
+            |   dato:dato                               {:
+                                                                        RESULT=dato;
+                                                                        :}
+            ;
+
+dato::=                         ID:id           {:RESULT = new NodoC3D(id);:}
+            |   ENTERO:entero   {:RESULT = new NodoC3D(entero);:}
+            |   DECIMAL:decimal {:RESULT = new NodoC3D(decimal);:}
+                        ;
+
